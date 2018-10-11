@@ -30,7 +30,7 @@ io.on('connect', function(socket) {
   var questionNum = 0; // keep count of question, used for IF condition.
   socket.on('loaded', function() { // we wait until the client has loaded and contacted us that it is ready to go.
 
-    socket.emit('answer', "Hey, hello I am \"___*-\" a simple chat bot example."); //We start with the introduction;
+    socket.emit('answer', "Hey, hello I am BLU a bipolar chat bot."); //We start with the introduction;
     setTimeout(timedQuestion, 5000, socket, "What is your name?"); // Wait a moment and respond with a question.
 
   });
@@ -53,9 +53,12 @@ function bot(data, socket, questionNum) {
   if (questionNum == 0) {
     answer = 'Hello ' + input + ' :-)'; // output response
     waitTime = 5000;
-    question = 'How old are you?'; // load next question
+    question = 'What is your favorite day of the week?'; // load next question
   } else if (questionNum == 1) {
-    answer = 'Really, ' + input + ' years old? So that means you were born in: ' + (2018 - parseInt(input)); // output response
+	if (input.toLowerCase().includes("thu"))
+		answer = 'Woow! Me too!'
+	else
+		answer = input + ' is probably the worst day in the week...sorry, we can\'t be friends anymore';
     waitTime = 5000;
     question = 'Where do you live?'; // load next question
   } else if (questionNum == 2) {
@@ -64,9 +67,9 @@ function bot(data, socket, questionNum) {
     question = 'Whats your favorite color?'; // load next question
   } else if (questionNum == 3) {
     answer = 'Ok, ' + input + ' it is.';
-    socket.emit('changeBG', input.toLowerCase());
+    socket.emit('changeBG', "#2196F3");
     waitTime = 5000;
-    question = 'Can you still read the font?'; // load next question
+    question = 'What ever, this is my favorite color'; // load next question
   } else if (questionNum == 4) {
     if (input.toLowerCase() === 'yes' || input === 1) {
       answer = 'Perfect!';
@@ -104,6 +107,5 @@ function timedQuestion(socket, question) {
   } else {
     //console.log('No Question send!');
   }
-
 }
 //----------------------------------------------------------------------------//
